@@ -1,0 +1,51 @@
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+
+h1 {
+  text-align: center;
+  border: 3px solid red;
+  color:white;
+  background-color: DarkGrey;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+h2 {
+  text-decoration:underline;
+  color:black;
+  font-size: 18px;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+h3 {
+  font-size: 15px;
+}
+
+h4 {
+  font-size: 11px;
+  color:firebrick;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+h5 {
+  font-size: 14px;
+  font-weight: 700;
+}
+h6 {
+  font-size: 16px;
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-weight: 700;
+}
+tabPanel {
+  background-color: red;
+  color:white;
+  
+}
+
+p{
+  font-size: 14px;
+  color:firebrick;
+  font-family: "Lucida Console", "Courier New", monospace;
+}

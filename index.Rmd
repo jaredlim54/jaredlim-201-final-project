@@ -1,0 +1,82 @@
+---
+title: "Nintendo Games Midpoint Deliverable"
+author: "Jared Lim, Brian Ho, Asigiah, Harlette Tanduyan"
+date: 11/30/2020
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("scripts/bar graph analysis.R")
+source("scripts/line_graph_analysis.R")
+knitr::opts_chunk$set(error = TRUE)
+library(modeest)
+library(dplyr)
+library(knitr)
+library(ggplot2)
+library(plotly)
+library(leaflet)
+library(tidyr)
+library(viridis)
+library(hrbrthemes)
+
+source("scripts/summaryinfo.R")
+
+source("scripts/bar graph analysis.R")
+
+source("scripts/line_graph_analysis.R")
+
+source("scripts/aggregated_table.R")
+```
+
+# Introduction
+This is the midpoint deliverable on our final project, which is about analyzing video game sales published by Nintendo. The source of the data can be found [here](https://www.kaggle.com/ashaheedq/video-games-sales-2019). The overall purpose of this project is to get a better understanding of where Nintendo's revenue comes from. The other purpose is to understand the overall revenue and popularity of Nintendo's most well-known video game titles. 
+
+## Aggregated Data Summary
+The table below shows an aggregated table of information.
+```{r table, echo=FALSE}
+source("scripts/aggregated_table.R")
+table <- head(aggregated_data)
+kable(table, col.names = c("Rank", "Name", "Genre", "ESRB Rating", "Platform", "Critic Score", "User Score", "Total Copies Shipped (in millions)", "Year Released"), align = "c")
+```
+
+This aggregated table displays Nintendo games by the amount of copies sold in an ascending order. It is interesting to note that the top Nintendo games were not released recently, with many of them dating before 2010. Interestingly, most of the ESRB Ratings of the top Nintendo games are rated E on ESRB, meaning that its content is considered very suitable for children and family.
+
+## Summary Information
+```{r, echo=FALSE}
+source("scripts/summaryinfo.R")
+```
+The video game sales data from our data folder includes `r games_summary$Rank$max_value` video games, worth a total profit of `r games_summary$Global_Sales$sum` million dollars. If we filter through games that were published solely by Nintendo, there are `r nrow(nintendo_games)` titles recorded in this data. A total profit of `r nintendo_summary$Global_Sales$sum` million USD was made globally from Nintendo games' global sales. The most common platform that Nintendo publishes games on are on `r nintendo_summary$Platform$mode`. The mean critic score of the Nintendo games in this data set is `r nintendo_summary$Critic_Score$mean` out of 10 while the mean user score of Nintendo games is `r nintendo_summary$User_Score$mean`. 
+
+In contrast the most common platform for the data set is `r games_summary$Platform$mode`. In addition, the mean critic score of the the whole data set is `r games_summary$Critic_Score$mean` and the mean user score is `r games_summary$User_Score$mean`.
+
+
+This information moreover indicates that Nintendo games are rated slightly higher than the overall list of video games on the list, when NA values are excluded. Also, most games of the data set are played on PC, while Nintendo games are typically on console or 3DS. 
+
+## Bar Graph of Average Sales Sold By Region
+```{r bar_graph, echo=FALSE, message=FALSE, warning=FALSE}
+source("scripts/bar graph analysis.R")
+country_games_bar_graph
+```
+
+When exploring questions, the chart above helped me specifically answer the question I had in mind. This question consisted of asking,"Which region had the highest number of sales sold?". The chart did this by ranking the regions with the highest sales sold in millions. The key in reading this chart is being able to absorb the meaning of each information within the different heights of the bars. The higher the bars in each region, means the larger amount of sales of games that were sold. The chart is specifically a bar chart, which allows for easy relative comparison of the different regions, with the height of each making size differences easier to observe.
+
+This chart also reveals key insights. When observing  the map, it shows that a large fraction of the global sales are from North America, as North America's values are the closest to the values of Global Sales. To add on, the chart shows that the PAL and Japan Sales are quite lower in sales sold, than compared to North America. With the vast of information being seen from comparing just regions to global sales overall, it can create the idea that there might be significant difference that may be impacted by a multitude of factors, especially social ones, that are not investigated in this report.
+
+## Nintendo Line Graph
+```{r plot3, echo=FALSE, message=FALSE, warning=FALSE,fig.width= 20}
+source("scripts/line_graph_analysis.R")
+final_nintendo_graph
+```
+This line graph shows the total amount of Nintendo Global sales, Japan sales and North America sales over the years. The x-axis represents the years, from 1975 to 2020. The y-axis represents the value in thousands for amount of sales. This graph helps us understand which region had the most sales each year and how much total sales Nintendo made globally each year. 
+
+## Nintedo Dot Plot
+```{r dot_plot, echo=FALSE, message=FALSE, warning=FALSE}
+source("scripts/dot_plot_analysis.R")
+top_ten_globally
+```
+
+This dot plots hopes to achieve clarity in the leading Nintendo games of the video game industry. One of the most common discussions in the community are which games can be credited to be the best. While that conclusion is entirely subjective, we can approach it through an economical lens to decide how well a game sold throughout the world. Here, the plot displays the current top ten franchises manufactured by Nintendo, as seen on the Y axis, and how many copies in millions sold, as seen on the X axis. 
+
+By quick glance, readers can see that in terms of monopoly, *Wii Sports* leads twice as much as its runner up, *Super Mario Bros.* at more than 80 million copies sold worldwide. 
+
